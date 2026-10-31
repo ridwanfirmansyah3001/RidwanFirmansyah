@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+# RidwanFirmansyah
+=======
+>>>>>>> d1def16 (Changing Website Title)
 # Maple Pixel Portfolio
 
 Autumn pixel-art portfolio. Plain HTML/CSS/JS, no build step.
@@ -42,3 +48,7 @@ All paths are relative, so it works under both URL styles.
 - The contact form is a front-end demo. GitHub Pages is static, so wire it to Formspree / Web3Forms to receive real messages (see `js/contact.js`).
 - Tailwind runs through the Play CDN for zero-setup. For production, consider the Tailwind CLI to ship a small compiled CSS file.
 - Footer social links are `#` placeholders. Replace them with real URLs.
+<<<<<<< HEAD
+=======
+>>>>>>> 0d577b0 (Initial website commit)
+>>>>>>> d1def16 (Changing Website Title)
