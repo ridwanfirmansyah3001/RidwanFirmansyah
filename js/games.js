@@ -8,12 +8,14 @@ const steamHeader = (appId) => `https://cdn.akamai.steamstatic.com/steam/apps/${
 
 export function initGames() {
     const grid = document.getElementById('gamesGrid');
-    if (!grid) return;
+    if (!grid) { console.error('games.js: #gamesGrid not found. Did you paste the <section id="games"> block into index.html?'); return; }
+    if (!gamesData.length) console.warn('games.js: games-data.js has no entries.');
 
     gamesData.forEach(game => {
-        // appId must be digits only; this also keeps the URL safe
-        const appId = String(game.appId).replace(/\D/g, '');
-        if (!appId) { console.warn('games-data: invalid appId for', game.title); return; }
+        // Accepts 1234567, '1234567' or a full Steam URL (.../app/1234567/Name/)
+        const raw = String(game.appId ?? '').trim();
+        const appId = (raw.match(/\/app\/(\d+)/) || raw.match(/^(\d+)$/) || [])[1];
+        if (!appId) { console.warn(`games-data: could not read an appId from "${raw}" (${game.title})`); return; }
 
         const cover = game.image || steamHeader(appId);
         const card = document.createElement('article');
@@ -42,12 +44,20 @@ export function initGames() {
             </a>
         `;
 
-        // If Steam's image can't load and you gave a local one, fall back to it
+        // Fallbacks: Steam image -> your local image -> "unavailable" panel
         const img = card.querySelector('img');
-        img.addEventListener('error', () => {
+        img.addEventListener('error', function onError() {
             console.warn(`Cover failed to load: ${img.getAttribute('src')}`);
-            if (game.image && img.getAttribute('src') !== game.image) img.src = game.image;
-        }, { once: true });
+            if (game.image && img.getAttribute('src') !== game.image) {
+                img.src = game.image; // try the local image once
+                return;
+            }
+            img.removeEventListener('error', onError);
+            img.replaceWith(Object.assign(document.createElement('div'), {
+                className: 'w-full h-full flex items-center justify-center font-pixelText text-xl text-maple-amber',
+                textContent: 'Preview unavailable - click to open Steam'
+            }));
+        });
 
         grid.appendChild(card);
     });
