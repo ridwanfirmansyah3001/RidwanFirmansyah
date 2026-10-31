@@ -88,3 +88,32 @@
     html { scroll-behavior: auto; }
     .pixel-btn { transition: none; }
 }
+
+/* ---- Image protection (add to the end of css/styles.css) ---- */
+.protected img {
+    -webkit-user-drag: none;       /* no drag-to-desktop */
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;   /* no iOS long-press "Save image" sheet */
+    pointer-events: none;          /* clicks/right-clicks hit the card, not the <img> */
+}
+
+/* Optional watermark layer for the lightbox (see watermark snippet) */
+.art-watermark {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    gap: 2.5rem 3rem;
+    transform: rotate(-20deg) scale(1.4);
+    opacity: 0.16;
+    color: #FAF0DB;
+    font-family: 'Silkscreen', cursive;
+    font-size: 0.75rem;
+    user-select: none;
+}
+

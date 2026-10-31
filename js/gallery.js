@@ -9,7 +9,7 @@ const BTN_INACTIVE = 'filter-btn pixel-btn bg-maple-bark text-maple-cream border
 const esc = (s) => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
 // Watermark shown over lightbox images (put your name/handle here)
-const WATERMARK = 'YOUR NAME';
+const WATERMARK = 'RIDWAN FIRMANSYAH';
 const watermarkHtml = `<div class="art-watermark" aria-hidden="true">${`<span>© ${esc(WATERMARK)}</span>`.repeat(24)}</div>`;
 
 // Placeholder square (used when an item has no image or the image fails to load)
