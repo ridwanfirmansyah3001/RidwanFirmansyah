@@ -8,6 +8,10 @@ const BTN_INACTIVE = 'filter-btn pixel-btn bg-maple-bark text-maple-cream border
 // Escape text before putting it into innerHTML
 const esc = (s) => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
+// Watermark shown over lightbox images (put your name/handle here)
+const WATERMARK = 'YOUR NAME';
+const watermarkHtml = `<div class="art-watermark" aria-hidden="true">${`<span>© ${esc(WATERMARK)}</span>`.repeat(24)}</div>`;
+
 // Placeholder square (used when an item has no image or the image fails to load)
 function placeholderSvg(item, large) {
     const [a, aw, b, bw, c, cw] = large ? [1, 14, 3, 10, 5, 6] : [2, 12, 4, 8, 6, 4];
@@ -132,8 +136,9 @@ export function initGallery() {
             </div>` : '';
 
         modalContent.innerHTML = `
-            <div class="relative bg-maple-mahogany border-2 border-maple-gold p-6 flex items-center justify-center min-h-[220px]">
+            <div class="relative overflow-hidden bg-maple-mahogany border-2 border-maple-gold p-6 flex items-center justify-center min-h-[220px]">
                 ${main}
+                ${watermarkHtml}
                 ${arrows}
             </div>
             ${slide?.caption ? `<p class="font-pixelText text-lg text-maple-amber text-center">${esc(slide.caption)}</p>` : ''}
