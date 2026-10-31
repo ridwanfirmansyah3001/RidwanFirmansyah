@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaplePixel | Pixel Artist & Game Designer Portfolio</title>
+    <meta name="description" content="Portfolio of Ridwan Firmansyah, 2D pixel artist and animator specializing in pixel worlds and characters.">
+    <meta name="theme-color" content="#2A0D0B">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%232A0D0B'/%3E%3Cpath d='M7 1h2v2H7zM5 3h6v1H5zM3 5h10v1H3zM2 7h12v2H2zM3 10h10v1H3zM5 12h6v1H5zM7 14h2v2H7z' fill='%23F4B030'/%3E%3C/svg%3E">
+
+    <!-- Third-party (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/tailwind.config.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Silkscreen:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Local styles (relative path => works on GitHub Pages project sites) -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-maple-mahogany text-maple-cream font-sans min-h-full flex flex-col relative overflow-x-hidden selection:bg-maple-amber selection:text-maple-mahogany">
+
+    <!-- Interactive Canvas Background for Falling Leaves -->
+    <canvas id="leafCanvas"></canvas>
+
+    <header class="sticky top-0 z-40 bg-maple-mahogany/90 border-b-4 border-maple-terracotta backdrop-blur-md px-4 py-3">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+
+            <!-- Logo -->
+            <a href="#home" data-sfx="click" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 bg-maple-crimson border-2 border-maple-gold flex items-center justify-center rounded-none shadow-[2px_2px_0px_0px_#180605] group-hover:scale-105 transition-transform">
+                    <svg class="w-7 h-7 pixelated text-maple-gold" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M7 1h2v2H7V1zm-2 2h6v1H5V3zm-2 2h10v1H3V5zm-1 2h12v2H2V7zm1 3h10v1H3v-1zm2 2h6v1H5v-1zm2 2h2v2H7v-2z"/>
+                        <path d="M7 6h2v6H7V6z" fill="#C83228"/>
+                    </svg>
+                </div>
+                <div>
+                    <span class="font-pixelHeading text-lg text-maple-gold tracking-wider block leading-none">RIDWAN FIRMANSYAH</span>
+                    <span class="font-pixelText text-sm text-maple-amber">Pixel Artist & Animator</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-6 font-pixelHeading text-xs">
+                <a href="#about" data-sfx="hover" class="hover:text-maple-gold transition-colors flex items-center gap-1.5 py-1 px-2 border-b-2 border-transparent hover:border-maple-gold">
+                    <i class="ph ph-user text-base"></i> About
+                </a>
+                <a href="#gallery" data-sfx="hover" class="hover:text-maple-gold transition-colors flex items-center gap-1.5 py-1 px-2 border-b-2 border-transparent hover:border-maple-gold">
+                    <i class="ph ph-image text-base"></i> Works
+                </a>
+                <a href="#interactive" data-sfx="hover" class="hover:text-maple-gold transition-colors flex items-center gap-1.5 py-1 px-2 border-b-2 border-transparent hover:border-maple-gold">
+                    <i class="ph ph-paint-brush-broad text-base"></i> Live Canvas
+                </a>
+                <a href="#contact" data-sfx="hover" class="hover:text-maple-gold transition-colors flex items-center gap-1.5 py-1 px-2 border-b-2 border-transparent hover:border-maple-gold">
+                    <i class="ph ph-envelope-simple text-base"></i> Contact
+                </a>
+            </nav>
+
+            <!-- Actions (Audio Toggle & Hire Button) -->
+            <div class="flex items-center gap-3 relative z-10">
+                <button id="soundToggleBtn" type="button" title="Toggle Pixel SFX" class="pixel-btn bg-maple-bark text-maple-gold border-2 border-maple-amber p-2 flex items-center justify-center">
+                    <i id="soundIcon" class="ph ph-speaker-high text-lg"></i>
+                </button>
+                <a href="#contact" data-sfx="click" class="pixel-btn hidden sm:flex items-center gap-2 bg-maple-crimson text-maple-cream font-pixelHeading text-xs px-4 py-2.5 border-2 border-maple-gold">
+                    <i class="ph ph-briefcase text-sm"></i> Hire Me
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow z-10 relative">
+
+        <!-- HERO -->
+        <section id="home" class="max-w-7xl mx-auto px-4 py-12 md:py-20">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-maple-bark border-2 border-maple-amber font-pixelHeading text-xs text-maple-gold">
+                        <span class="w-2.5 h-2.5 bg-green-500 rounded-none animate-pulse"></span>
+                        AVAILABLE FOR GAME STUDIO & CONTRACT ROLES
+                    </div>
+
+                    <h1 class="font-pixelHeading text-3xl sm:text-4xl md:text-5xl text-maple-cream leading-tight">
+                        FROM <span class="text-maple-gold underline decoration-maple-crimson decoration-4">Consept</span> TO REAL PIXEL WORLDS & CHARACTERS
+                    </h1>
+
+                    <p class="font-pixelText text-xl md:text-2xl text-maple-amber leading-relaxed">
+                        Hi, I’m Ridwan! I specialize in design consept to pixel art sprites, detailed character based on reference, and smooth frame-by-frame sprites.
+                    </p>
+
+                    <div class="grid grid-cols-3 gap-3 pt-2 font-pixelText">
+                        <div class="bg-maple-bark p-3 border-2 border-maple-terracotta text-center">
+                            <div class="text-2xl text-maple-gold font-bold">4+</div>
+                            <div class="text-xs text-maple-cream">Years Experience</div>
+                        </div>
+                        <div class="bg-maple-bark p-3 border-2 border-maple-terracotta text-center">
+                            <div class="text-2xl text-maple-gold font-bold">14</div>
+                            <div class="text-xs text-maple-cream">Shipped Titles</div>
+                        </div>
+                        <div class="bg-maple-bark p-3 border-2 border-maple-terracotta text-center">
+                            <div class="text-2xl text-maple-gold font-bold">500+</div>
+                            <div class="text-xs text-maple-cream">Sprites Created</div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-4 pt-4">
+                        <a href="#gallery" data-sfx="click" class="pixel-btn bg-maple-amber text-maple-mahogany font-pixelHeading text-sm px-6 py-3 border-2 border-maple-gold flex items-center gap-2 font-bold">
+                            <i class="ph ph-cards text-lg"></i> Explore Works
+                        </a>
+                        <a href="#interactive" data-sfx="click" class="pixel-btn bg-maple-bark text-maple-cream font-pixelHeading text-sm px-6 py-3 border-2 border-maple-terracotta flex items-center gap-2">
+                            <i class="ph ph-paint-brush text-lg"></i> Try Drawing Tool
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5">
+                    <div class="pixel-box p-4 bg-maple-bark">
+                        <div class="border-2 border-maple-amber p-2 bg-maple-mahogany relative group overflow-hidden">
+                            <img id="heroImage"
+                                src="assets/images/Rutsah_Monster_OneFrame_Scaled.png"
+                                alt="Monster pixel art"
+                                width="320" height="320"
+                                class="w-full h-auto pixelated block cursor-pointer transition-[filter] duration-100">
+                            <div class="absolute bottom-3 right-3 bg-maple-mahogany/90 border border-maple-gold px-2 py-1 font-pixelText text-xs text-maple-gold">
+                                Click to Play SFX
+                            </div>
+                        </div>
+                        <div class="mt-3 flex items-center justify-between font-pixelHeading text-xs text-maple-gold">
+                            <span>Monster</span>
+                            <span class="text-maple-amber">320x320 px</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- GALLERY -->
+        <section id="gallery" class="max-w-7xl mx-auto px-4 py-12">
+            <div class="text-center space-y-3 mb-8">
+                <h2 class="font-pixelHeading text-2xl md:text-3xl text-maple-gold">ARTWORK SHOWCASE</h2>
+                <p class="font-pixelText text-xl text-maple-amber">Filter through specialized game art categories</p>
+            </div>
+
+            <!-- Filter buttons (classes are managed by js/gallery.js) -->
+            <div id="filterButtons" class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8 font-pixelHeading text-xs">
+                <button type="button" class="filter-btn active pixel-btn bg-maple-crimson text-maple-cream border-2 border-maple-gold px-4 py-2" data-cat="all">ALL WORKS</button>
+                <button type="button" class="filter-btn pixel-btn bg-maple-bark text-maple-cream border-2 border-maple-terracotta px-4 py-2" data-cat="environments">ENVIRONMENTS</button>
+                <button type="button" class="filter-btn pixel-btn bg-maple-bark text-maple-cream border-2 border-maple-terracotta px-4 py-2" data-cat="characters">CHARACTERS</button>
+                <button type="button" class="filter-btn pixel-btn bg-maple-bark text-maple-cream border-2 border-maple-terracotta px-4 py-2" data-cat="assets">GAME ASSETS</button>
+                <button type="button" class="filter-btn pixel-btn bg-maple-bark text-maple-cream border-2 border-maple-terracotta px-4 py-2" data-cat="ui">UI & ICONS</button>
+            </div>
+
+            <div id="galleryGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Populated by js/gallery.js -->
+            </div>
+        </section>
+
+        <!-- INTERACTIVE STUDIO -->
+        <section id="interactive" class="max-w-7xl mx-auto px-4 py-12">
+            <div class="pixel-box p-6 bg-maple-bark border-4 border-maple-amber">
+                <div class="text-center space-y-2 mb-6">
+                    <h2 class="font-pixelHeading text-2xl text-maple-gold">INTERACTIVE PIXEL STUDIO</h2>
+                    <p class="font-pixelText text-lg text-maple-cream">Test out my palette! Draw your own autumn pixel creation on an 16x16 grid below.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+
+                    <div class="md:col-span-4 space-y-4 bg-maple-mahogany p-4 border-2 border-maple-terracotta">
+                        <div class="font-pixelHeading text-xs text-maple-amber uppercase tracking-wider">Autumn Palette</div>
+                        <div id="drawPalette" class="grid grid-cols-4 gap-2">
+                            <!-- Populated by js/draw-studio.js -->
+                        </div>
+
+                        <div class="pt-2 font-pixelHeading text-xs text-maple-amber uppercase tracking-wider">Tools</div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button id="drawToolPencil" type="button" data-tool="pencil" class="pixel-btn bg-maple-terracotta text-maple-cream text-xs font-pixelHeading py-2 border-2 border-maple-gold flex items-center justify-center gap-1">
+                                <i class="ph ph-pencil-simple"></i> Pencil
+                            </button>
+                            <button id="drawToolEraser" type="button" data-tool="eraser" class="pixel-btn bg-maple-bark text-maple-cream text-xs font-pixelHeading py-2 border-2 border-maple-terracotta flex items-center justify-center gap-1">
+                                <i class="ph ph-eraser"></i> Eraser
+                            </button>
+                        </div>
+
+                        <div class="flex gap-2 pt-2">
+                            <button id="clearCanvasBtn" type="button" class="pixel-btn w-full bg-maple-crimson text-maple-cream text-xs font-pixelHeading py-2 border-2 border-maple-gold">
+                                Clear Canvas
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-8 flex flex-col items-center justify-center">
+                        <div class="p-2 bg-maple-mahogany border-4 border-maple-amber shadow-2xl">
+                            <canvas id="interactiveCanvas" width="256" height="256" class="pixelated cursor-crosshair bg-maple-mahogany border border-maple-bark"></canvas>
+                        </div>
+                        <div class="mt-3 font-pixelText text-base text-maple-amber flex items-center gap-2">
+                            <i class="ph ph-info text-lg"></i> Click or drag on the canvas to draw pixel art.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section id="about" class="max-w-7xl mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+                <div class="lg:col-span-7 pixel-box p-6 bg-maple-bark">
+                    <h2 class="font-pixelHeading text-2xl text-maple-gold mb-4 flex items-center gap-2">
+                        <i class="ph ph-user-circle text-2xl text-maple-amber"></i> ABOUT RIDWAN
+                    </h2>
+
+                    <div class="font-pixelText text-xl text-maple-cream space-y-4 leading-relaxed">
+                        <p>
+                            With over 6 years of experience in the game development industry, I construct cohesive visual identities for games with a primary focus on <strong class="text-maple-gold">pixel art readability, expressive character animations, and immersive environmental storytelling</strong>.
+                        </p>
+                        <p>
+                            My aesthetic blends nostalgic retro tile structures with modern flat lighting and carefully harmonized color palettes—like this Maple Autumn theme.
+                        </p>
+                    </div>
+
+                    <div class="mt-6 pt-6 border-t-2 border-maple-terracotta">
+                        <h3 class="font-pixelHeading text-sm text-maple-gold mb-3">TECHNICAL SKILLSET</h3>
+                        <div class="flex flex-wrap gap-2 font-pixelHeading text-xs">
+                            <span class="bg-maple-mahogany text-maple-amber border border-maple-amber px-2.5 py-1">Aseprite Mastery</span>
+                            <span class="bg-maple-mahogany text-maple-amber border border-maple-amber px-2.5 py-1">Tilemaps & Auto-Tiling</span>
+                            <span class="bg-maple-mahogany text-maple-amber border border-maple-amber px-2.5 py-1">Unity Sprite Pipeline</span>
+                            <span class="bg-maple-mahogany text-maple-amber border border-maple-amber px-2.5 py-1">Godot TileSet Editor</span>
+                            <span class="bg-maple-mahogany text-maple-amber border border-maple-amber px-2.5 py-1">Frame-by-Frame Animation</span>
+                            <span class="bg-maple-mahogany text-maple-amber border border-maple-amber px-2.5 py-1">UI/HUD Design</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 pixel-box p-6 bg-maple-mahogany border-4 border-maple-terracotta">
+                    <h2 class="font-pixelHeading text-xl text-maple-gold mb-4 flex items-center justify-between">
+                        <span>EXPERIENCE LOG</span>
+                        <a href="#contact" data-sfx="click" class="text-xs text-maple-amber hover:underline font-pixelText">[PDF Resume]</a>
+                    </h2>
+
+                    <div class="space-y-4 font-pixelText">
+                        <div class="border-l-4 border-maple-crimson pl-3 py-1">
+                            <div class="font-pixelHeading text-xs text-maple-gold">LEAD PIXEL ARTIST</div>
+                            <div class="text-sm text-maple-amber">TimberWood Games • 2023 - Present</div>
+                            <p class="text-base text-maple-cream mt-1">Directed art style for an unannounced autumn-themed cozy RPG. Created over 300+ environment assets.</p>
+                        </div>
+
+                        <div class="border-l-4 border-maple-terracotta pl-3 py-1">
+                            <div class="font-pixelHeading text-xs text-maple-gold">2D SPRITE ANIMATOR</div>
+                            <div class="text-sm text-maple-amber">PixelForge Studio • 2021 - 2023</div>
+                            <p class="text-base text-maple-cream mt-1">Animated combat sprites, bosses, and FX for a popular Steam Metroidvania.</p>
+                        </div>
+
+                        <div class="border-l-4 border-maple-amber pl-3 py-1">
+                            <div class="font-pixelHeading text-xs text-maple-gold">FREELANCE CONCEPT ARTIST</div>
+                            <div class="text-sm text-maple-amber">Indie Clients • 2018 - 2021</div>
+                            <p class="text-base text-maple-cream mt-1">Designed game UI icons, steam capsule art, and tile sets for various mobile & PC titles.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" class="max-w-4xl mx-auto px-4 py-12">
+            <div class="pixel-box p-6 md:p-8 bg-maple-bark border-4 border-maple-gold">
+                <div class="text-center space-y-2 mb-6">
+                    <h2 class="font-pixelHeading text-2xl md:text-3xl text-maple-gold">JOB INQUIRY / CONTACT</h2>
+                    <p class="font-pixelText text-xl text-maple-amber">Looking for a pixel artist for your studio or upcoming title? Send a message!</p>
+                </div>
+
+                <form id="contactForm" class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="contactName" class="block font-pixelHeading text-xs text-maple-gold mb-2">YOUR NAME / STUDIO</label>
+                            <input id="contactName" name="name" type="text" required placeholder="e.g. Amber Studio" class="w-full bg-maple-mahogany border-2 border-maple-terracotta px-3 py-2 font-pixelText text-xl text-maple-cream focus:outline-none focus:border-maple-gold">
+                        </div>
+                        <div>
+                            <label for="contactEmail" class="block font-pixelHeading text-xs text-maple-gold mb-2">EMAIL ADDRESS</label>
+                            <input id="contactEmail" name="email" type="email" required placeholder="e.g. producer@studio.com" class="w-full bg-maple-mahogany border-2 border-maple-terracotta px-3 py-2 font-pixelText text-xl text-maple-cream focus:outline-none focus:border-maple-gold">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="contactType" class="block font-pixelHeading text-xs text-maple-gold mb-2">PROJECT TYPE / ROLE</label>
+                        <select id="contactType" name="type" class="w-full bg-maple-mahogany border-2 border-maple-terracotta px-3 py-2 font-pixelText text-xl text-maple-cream focus:outline-none focus:border-maple-gold">
+                            <option>Full-time Game Studio Role</option>
+                            <option>Contract / Freelance Project</option>
+                            <option>Art Direction & Consulting</option>
+                            <option>Other Inquiry</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="contactMessage" class="block font-pixelHeading text-xs text-maple-gold mb-2">MESSAGE DETAILS</label>
+                        <textarea id="contactMessage" name="message" rows="4" required placeholder="Tell me about your project scope, timeline, and requirements..." class="w-full bg-maple-mahogany border-2 border-maple-terracotta px-3 py-2 font-pixelText text-xl text-maple-cream focus:outline-none focus:border-maple-gold"></textarea>
+                    </div>
+
+                    <button type="submit" class="pixel-btn w-full bg-maple-crimson text-maple-cream font-pixelHeading text-sm py-3 border-2 border-maple-gold flex items-center justify-center gap-2">
+                        <i class="ph ph-paper-plane-tilt text-lg"></i> TRANSMIT MESSAGE
+                    </button>
+                </form>
+
+                <div id="contactSuccessMsg" class="hidden mt-4 p-4 bg-maple-mahogany border-2 border-green-500 text-center text-green-400 font-pixelText text-xl">
+                    <i class="ph ph-check-circle text-2xl inline-block align-middle mr-1"></i> Message sent successfully! Ridwan will respond shortly.
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Artwork lightbox -->
+    <div id="artModal" class="fixed inset-0 z-50 hidden modal-overlay flex items-center justify-center p-4" role="dialog" aria-modal="true">
+        <div class="pixel-box bg-maple-bark max-w-3xl w-full p-6 border-4 border-maple-gold relative max-h-[90vh] overflow-y-auto">
+            <button id="closeModalBtn" type="button" aria-label="Close" class="absolute top-3 right-3 text-maple-gold hover:text-maple-crimson font-pixelHeading text-lg">
+                [X]
+            </button>
+            <div id="modalContent" class="space-y-4">
+                <!-- Populated by js/gallery.js -->
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-maple-mahogany border-t-4 border-maple-terracotta z-10 relative py-6 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 font-pixelText text-lg text-maple-amber">
+            <div>© 2026 RIDWAN FIRMANSYAH • PIXEL ARTIST PORTFOLIO</div>
+            <div class="flex gap-4">
+                <!-- Replace href="#" with your real profile URLs -->
+                <a href="#" data-sfx="click" class="hover:text-maple-gold"><i class="ph ph-twitter-logo text-xl"></i> Twitter</a>
+                <a href="#" data-sfx="click" class="hover:text-maple-gold"><i class="ph ph-github-logo text-xl"></i> GitHub</a>
+                <a href="#" data-sfx="click" class="hover:text-maple-gold"><i class="ph ph-dribbble-logo text-xl"></i> ArtStation</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- App entry (ES modules are deferred, so the DOM is ready) -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
