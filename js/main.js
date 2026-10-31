@@ -18,7 +18,8 @@ const sections = [
     ['./hero-image.js', 'initHeroImage'],
     ['./gallery.js', 'initGallery'],
     ['./draw-studio.js', 'initDrawStudio'],
-    ['./contact.js', 'initContactForm']
+    ['./contact.js', 'initContactForm'],
+    ['./games.js', 'initGames']
 ];
 
 for (const [path, fn] of sections) {
